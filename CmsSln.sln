@@ -25,25 +25,27 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Presentation", "Presentatio
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Core", "Core", "{2AA8B1D6-D093-4465-95B8-E9936EF22F6F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ContentService.Domain", "src\Services\ContentService\Core\ContentService.Domain\ContentService.Domain.csproj", "{3177974F-30C3-44DA-942D-8EE8164F531E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ContentService.Domain", "src\Services\ContentService\Core\ContentService.Domain\ContentService.Domain.csproj", "{3177974F-30C3-44DA-942D-8EE8164F531E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ContentService.Application", "src\Services\ContentService\Core\ContentService.Application\ContentService.Application.csproj", "{3F55D454-DE71-405E-B3F1-EF2E128CEF84}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ContentService.Application", "src\Services\ContentService\Core\ContentService.Application\ContentService.Application.csproj", "{3F55D454-DE71-405E-B3F1-EF2E128CEF84}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ContentService.Infrastructure", "src\Services\ContentService\Infrastructure\ContentService.Infrastructure\ContentService.Infrastructure.csproj", "{830B9C81-1AAB-4B8E-9794-18A435E2C6F2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ContentService.Infrastructure", "src\Services\ContentService\Infrastructure\ContentService.Infrastructure\ContentService.Infrastructure.csproj", "{830B9C81-1AAB-4B8E-9794-18A435E2C6F2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ContentService.Persistence", "src\Services\ContentService\Infrastructure\ContentService.Persistence\ContentService.Persistence.csproj", "{CD71B1E1-90CA-4606-B235-145639406951}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ContentService.Persistence", "src\Services\ContentService\Infrastructure\ContentService.Persistence\ContentService.Persistence.csproj", "{CD71B1E1-90CA-4606-B235-145639406951}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ContentService.Api", "src\Services\ContentService\Presentation\ContentService.Api\ContentService.Api.csproj", "{5602D27E-6D03-4F7D-A4FA-F821808E9CF0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ContentService.Api", "src\Services\ContentService\Presentation\ContentService.Api\ContentService.Api.csproj", "{5602D27E-6D03-4F7D-A4FA-F821808E9CF0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UserService.Domain", "src\Services\UserService\Core\UserService.Domain\UserService.Domain.csproj", "{8DD45407-99E0-4C5E-9B08-C61DE81AEE23}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UserService.Domain", "src\Services\UserService\Core\UserService.Domain\UserService.Domain.csproj", "{8DD45407-99E0-4C5E-9B08-C61DE81AEE23}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UserService.Application", "src\Services\UserService\Core\UserService.Application\UserService.Application.csproj", "{4E0739A3-D7C6-44A9-B62F-521FB3C468D9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UserService.Application", "src\Services\UserService\Core\UserService.Application\UserService.Application.csproj", "{4E0739A3-D7C6-44A9-B62F-521FB3C468D9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UserService.Infrastructure", "src\Services\UserService\Infrastructure\UserService.Infrastructure\UserService.Infrastructure.csproj", "{DCC75833-72DF-47AF-A6B9-BC7AF6FA9525}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UserService.Infrastructure", "src\Services\UserService\Infrastructure\UserService.Infrastructure\UserService.Infrastructure.csproj", "{DCC75833-72DF-47AF-A6B9-BC7AF6FA9525}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UserService.Persistence", "src\Services\UserService\Infrastructure\UserService.Persistence\UserService.Persistence.csproj", "{D60ACD10-6FBE-401E-853C-FE3A001B772A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UserService.Persistence", "src\Services\UserService\Infrastructure\UserService.Persistence\UserService.Persistence.csproj", "{D60ACD10-6FBE-401E-853C-FE3A001B772A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UserService.Api", "src\Services\UserService\Presentation\UserService.Api\UserService.Api.csproj", "{73470B68-DF81-4763-9F45-663AC73AFAB6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UserService.Api", "src\Services\UserService\Presentation\UserService.Api\UserService.Api.csproj", "{73470B68-DF81-4763-9F45-663AC73AFAB6}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cms.Shared", "src\Shared\Cms.Shared\Cms.Shared.csproj", "{6B666651-DC25-4A18-AEE9-7116FD789F39}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -91,6 +93,10 @@ Global
 		{73470B68-DF81-4763-9F45-663AC73AFAB6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{73470B68-DF81-4763-9F45-663AC73AFAB6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{73470B68-DF81-4763-9F45-663AC73AFAB6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6B666651-DC25-4A18-AEE9-7116FD789F39}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6B666651-DC25-4A18-AEE9-7116FD789F39}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6B666651-DC25-4A18-AEE9-7116FD789F39}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6B666651-DC25-4A18-AEE9-7116FD789F39}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -116,6 +122,7 @@ Global
 		{DCC75833-72DF-47AF-A6B9-BC7AF6FA9525} = {78544F2D-7493-4047-AC7B-7A5E87A5C9C1}
 		{D60ACD10-6FBE-401E-853C-FE3A001B772A} = {78544F2D-7493-4047-AC7B-7A5E87A5C9C1}
 		{73470B68-DF81-4763-9F45-663AC73AFAB6} = {AD64A86E-B21F-4FFE-A558-CC48154C61FC}
+		{6B666651-DC25-4A18-AEE9-7116FD789F39} = {62847D0D-B93B-4B05-844F-AB002F56F39D}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {D0064624-C709-439B-AE36-50FC607551DD}
