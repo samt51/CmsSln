@@ -7,7 +7,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\..\..\Shared\Cms.Shared\Cms.Shared.csproj" />
+    <ProjectReference Include="..\..\..\..\Shared\Cms.Shared\Cms.Shared\Cms.Shared.csproj" />
   </ItemGroup>
 
 </Project>

@@ -1,5 +1,4 @@
-﻿
-using Cms.Shared.Dtos.ResponseModel;
+﻿using Cms.Shared.Bases.Dtos.ResponseModel;
 using MediatR;
 
 namespace ContentService.Application.Feature.Contents.Commands.DeleteContent

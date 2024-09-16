@@ -1,4 +1,10 @@
 using Cms.Shared;
+using UserService.Persistence;
+using UserService.Application;
+using Microsoft.EntityFrameworkCore;
+using UserService.Persistence.Context;
+using MassTransit;
+
 internal class Program
 {
     private static void Main(string[] args)
@@ -12,8 +18,13 @@ internal class Program
         builder.Services.AddEndpointsApiExplorer();
         builder.Services.AddSwaggerGen();
 
-        //builder.Services.AddPersistence(builder.Configuration);
         builder.Services.AddShared();
+        builder.Services.AddPersistence(builder.Configuration);
+        builder.Services.AddApplication(builder.Configuration);
+
+        builder.Services.AddDbContext<UserDbContext>(options =>
+    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+
 
         var app = builder.Build();
 
@@ -23,6 +34,7 @@ internal class Program
             app.UseSwagger();
             app.UseSwaggerUI();
         }
+
 
         app.UseHttpsRedirection();
 

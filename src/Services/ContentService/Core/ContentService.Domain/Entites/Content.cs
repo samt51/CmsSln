@@ -1,4 +1,4 @@
-﻿using Cms.Shared.Common;
+﻿using Cms.Shared.Bases.Common;
 
 namespace ContentService.Domain.Entites
 {

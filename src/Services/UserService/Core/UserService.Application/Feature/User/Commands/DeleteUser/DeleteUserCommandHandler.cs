@@ -1,7 +1,7 @@
-﻿using AutoMapper;
-using Cms.Shared.Abstract.UnitOfWork;
-using Cms.Shared.Bases;
-using Cms.Shared.Dtos.ResponseModel;
+﻿using Cms.Shared.Abstract.Mapping;
+using Cms.Shared.Abstract.UnitOfWorks;
+using Cms.Shared.Bases.Base;
+using Cms.Shared.Bases.Dtos.ResponseModel;
 using MediatR;
 using UserService.Domain.Entities;
 
@@ -19,14 +19,13 @@ namespace UserService.Application.Feature.User.Commands.DeleteUser
 
             data.IsDeleted = true;
             await unitOfWork.GetWriteRepository<Users>().UpdateAsync(data);
-            
-            if(await unitOfWork.SaveAsync() > 0)
+
+            if (await unitOfWork.SaveAsync() > 0)
             {
-                unitOfWork.Commit();
+                await unitOfWork.CommitAsync();
                 return new ResponseDto<DeleteUserCommandResponse>().Success();
             }
-            unitOfWork.RollBack();
-            return new ResponseDto<DeleteUserCommandResponse>().Fail("Bir hata oluştu", 400);
+            return new ResponseDto<DeleteUserCommandResponse>().Fail();
         }
     }
 }

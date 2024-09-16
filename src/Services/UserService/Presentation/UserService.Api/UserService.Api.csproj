@@ -10,12 +10,21 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="MassTransit" Version="8.2.5" />
+    <PackageReference Include="MassTransit.AspNetCore" Version="7.3.1" />
+    <PackageReference Include="MassTransit.RabbitMQ" Version="8.2.5" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="8.0.8">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
     <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.21.0" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.4.0" />
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\..\..\Shared\Cms.Shared\Cms.Shared.csproj" />
+    <ProjectReference Include="..\..\..\..\Shared\Cms.Shared\Cms.Shared\Cms.Shared.csproj" />
+    <ProjectReference Include="..\..\Core\UserService.Application\UserService.Application.csproj" />
+    <ProjectReference Include="..\..\Infrastructure\UserService.Persistence\UserService.Persistence.csproj" />
   </ItemGroup>
 
 </Project>

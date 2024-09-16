@@ -1,7 +1,7 @@
-﻿using AutoMapper;
-using Cms.Shared.Abstract.UnitOfWork;
-using Cms.Shared.Bases;
-using Cms.Shared.Dtos.ResponseModel;
+﻿using Cms.Shared.Abstract.Mapping;
+using Cms.Shared.Abstract.UnitOfWorks;
+using Cms.Shared.Bases.Base;
+using Cms.Shared.Bases.Dtos.ResponseModel;
 using MediatR;
 using UserService.Domain.Entities;
 
@@ -15,13 +15,15 @@ namespace UserService.Application.Feature.User.Commands.CreateUser
 
         public async Task<ResponseDto<CreateUserCommandResponse>> Handle(CreateUserCommandRequest request, CancellationToken cancellationToken)
         {
-            var map = mapper.Map<CreateUserCommandRequest, Users>(request);
+            var map = mapper.Map<Users, CreateUserCommandRequest>(request);
+
+            unitOfWork.OpenTransaction();
 
             var save = await unitOfWork.GetWriteRepository<Users>().AddAsync(map);
 
             if (await unitOfWork.SaveAsync() > 0)
             {
-                unitOfWork.Commit();
+                await unitOfWork.CommitAsync();
                 return new ResponseDto<CreateUserCommandResponse>().Success();
             }
             unitOfWork.RollBack();
