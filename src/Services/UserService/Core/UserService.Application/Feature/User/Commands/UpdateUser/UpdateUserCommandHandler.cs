@@ -1,8 +1,9 @@
-﻿using AutoMapper;
-using Cms.Shared.Abstract.UnitOfWork;
-using Cms.Shared.Bases;
-using Cms.Shared.Dtos.ResponseModel;
+﻿using Cms.Shared.Abstract.Mapping;
+using Cms.Shared.Abstract.UnitOfWorks;
+using Cms.Shared.Bases.Base;
+using Cms.Shared.Bases.Dtos.ResponseModel;
 using MediatR;
+using UserService.Domain.Entities;
 
 namespace UserService.Application.Feature.User.Commands.UpdateUser
 {
@@ -12,9 +13,19 @@ namespace UserService.Application.Feature.User.Commands.UpdateUser
         {
         }
 
-        public Task<ResponseDto<UpdateUserCommandResponse>> Handle(UpdateUserCommandRequest request, CancellationToken cancellationToken)
+        public async Task<ResponseDto<UpdateUserCommandResponse>> Handle(UpdateUserCommandRequest request, CancellationToken cancellationToken)
         {
-            throw new NotImplementedException();
+            var data = await unitOfWork.GetReadRepository<Users>().FindAsync(y => y.Id == request.Id && !y.IsDeleted);
+
+            var map = mapper.Map<Users, UpdateUserCommandRequest>(request);
+
+            var save = await unitOfWork.GetWriteRepository<Users>().UpdateAsync(map);
+
+            if (await unitOfWork.SaveAsync() > 0)
+            {
+                return new ResponseDto<UpdateUserCommandResponse>().Success();
+            }
+            return new ResponseDto<UpdateUserCommandResponse>().Fail();
         }
     }
 }

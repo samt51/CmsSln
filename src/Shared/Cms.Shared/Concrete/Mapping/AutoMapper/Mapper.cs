@@ -1,4 +1,6 @@
-﻿using AutoMapper.Internal;
+﻿
+
+using AutoMapper.Internal;
 using AutoMapper;
 
 namespace Cms.Shared.Concrete.Mapping.AutoMapper
@@ -6,7 +8,8 @@ namespace Cms.Shared.Concrete.Mapping.AutoMapper
     public class Mapper : Cms.Shared.Abstract.Mapping.AutoMapper.IMapper
     {
         public static List<TypePair> typePairs = new();
-        private AutoMapper.IMapper MapperContainer;
+        private IMapper MapperContainer;
+        
         public Mapper()
         {
             InitializeMapper();
@@ -73,7 +76,7 @@ namespace Cms.Shared.Concrete.Mapping.AutoMapper
                 {
                     CreateMapWithIgnore(cfg, typeof(TSource), typeof(TDestionation), ignore);
 
-                    cfg.AddProfile<ReportServiceMapping>(); // Profilinizi burada yükleyin
+                   
                 });
                 MapperContainer = config.CreateMapper();
             }

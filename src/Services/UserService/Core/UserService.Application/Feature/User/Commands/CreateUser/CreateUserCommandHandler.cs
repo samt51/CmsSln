@@ -1,8 +1,9 @@
-﻿using AutoMapper;
-using Cms.Shared.Abstract.UnitOfWork;
-using Cms.Shared.Bases;
-using Cms.Shared.Dtos.ResponseModel;
+﻿using Cms.Shared.Abstract.Mapping;
+using Cms.Shared.Abstract.UnitOfWorks;
+using Cms.Shared.Bases.Base;
+using Cms.Shared.Bases.Dtos.ResponseModel;
 using MediatR;
+using UserService.Domain.Entities;
 
 namespace UserService.Application.Feature.User.Commands.CreateUser
 {
@@ -12,9 +13,22 @@ namespace UserService.Application.Feature.User.Commands.CreateUser
         {
         }
 
-        public Task<ResponseDto<CreateUserCommandResponse>> Handle(CreateUserCommandRequest request, CancellationToken cancellationToken)
+        public async Task<ResponseDto<CreateUserCommandResponse>> Handle(CreateUserCommandRequest request, CancellationToken cancellationToken)
         {
-            throw new NotImplementedException();
+            var map = mapper.Map<Users, CreateUserCommandRequest>(request);
+
+            unitOfWork.OpenTransaction();
+
+            var save = await unitOfWork.GetWriteRepository<Users>().AddAsync(map);
+
+            if (await unitOfWork.SaveAsync() > 0)
+            {
+                await unitOfWork.CommitAsync();
+                return new ResponseDto<CreateUserCommandResponse>().Success();
+            }
+            unitOfWork.RollBack();
+            return new ResponseDto<CreateUserCommandResponse>().Fail("Bir hata oluştu.", 400);
+
         }
     }
 }

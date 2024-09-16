@@ -1,5 +1,4 @@
-﻿using Cms.Shared.Common;
-using System.ComponentModel.DataAnnotations;
+﻿using Cms.Shared.Bases.Common;
 
 namespace UserService.Domain.Entities
 {

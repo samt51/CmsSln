@@ -1,0 +1,24 @@
+version: '3.8'
+
+services:
+  rabbitmq:
+    image: rabbitmq:management
+    container_name: rabbitmq
+    ports:
+      - "5672:5672"  # RabbitMQ'nun mesajlaşma portu
+      - "15672:15672"  # RabbitMQ'nun yönetim arayüzü portu
+    environment:
+      RABBITMQ_DEFAULT_USER: guest
+      RABBITMQ_DEFAULT_PASS: guest
+
+  service1:
+    build:
+      context: ./Service1  # Service1 dizininizin yolu
+    ports:
+      - "5000:5000"  # Service1 portu
+
+  service2:
+    build:
+      context: ./Service2  # Service2 dizininizin yolu
+    ports:
+      - "5001:5001"  # Service2 portu

@@ -1,8 +1,9 @@
-﻿using AutoMapper;
-using Cms.Shared.Abstract.UnitOfWork;
-using Cms.Shared.Bases;
-using Cms.Shared.Dtos.ResponseModel;
+﻿using Cms.Shared.Abstract.Mapping;
+using Cms.Shared.Abstract.UnitOfWorks;
+using Cms.Shared.Bases.Base;
+using Cms.Shared.Bases.Dtos.ResponseModel;
 using MediatR;
+using UserService.Domain.Entities;
 
 namespace UserService.Application.Feature.User.Queries.GetByIdUser
 {
@@ -12,9 +13,13 @@ namespace UserService.Application.Feature.User.Queries.GetByIdUser
         {
         }
 
-        public Task<ResponseDto<GetByIdUserQueryResponse>> Handle(GetByIdUserQueryRequest request, CancellationToken cancellationToken)
+        public async Task<ResponseDto<GetByIdUserQueryResponse>> Handle(GetByIdUserQueryRequest request, CancellationToken cancellationToken)
         {
-            throw new NotImplementedException();
+            var data = await unitOfWork.GetReadRepository<Users>().FindAsync(y => y.Id == request.Id && !y.IsDeleted);
+
+            var map = mapper.Map<GetByIdUserQueryResponse, Users>(data);
+
+            return new ResponseDto<GetByIdUserQueryResponse>().Success(map);
         }
     }
 }

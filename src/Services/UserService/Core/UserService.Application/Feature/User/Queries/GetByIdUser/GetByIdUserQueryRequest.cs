@@ -1,4 +1,4 @@
-﻿using Cms.Shared.Dtos.ResponseModel;
+﻿using Cms.Shared.Bases.Dtos.ResponseModel;
 using MediatR;
 
 namespace UserService.Application.Feature.User.Queries.GetByIdUser
