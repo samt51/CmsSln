@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore.Query;
 using Microsoft.EntityFrameworkCore;
 using System.Linq.Expressions;
+using Cms.Shared.Exceptions;
 
 namespace Cms.Shared.Concrete.Repositories
 {
@@ -49,10 +50,17 @@ namespace Cms.Shared.Concrete.Repositories
 
             return await queryable.FirstOrDefaultAsync(predicate);
         }
-        public IQueryable<T> Find(Expression<Func<T, bool>> predicate, bool enableTracking = false)
+        public async Task<T> FindAsync(Expression<Func<T, bool>> predicate, bool enableTracking = false)
         {
-            if (!enableTracking) Table.AsNoTracking();
-            return Table.Where(predicate);
+            IQueryable<T> queryable = Table;
+            if (!enableTracking) queryable = queryable.AsNoTracking();
+
+            var data = await queryable.FirstOrDefaultAsync(predicate);
+            if (data is null)
+            {
+                throw new ClientSideException($"{typeof(T).Name}  Not Found");
+            }
+            return data;
         }
     }
 }

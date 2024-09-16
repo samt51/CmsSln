@@ -39,7 +39,7 @@ namespace Cms.Shared.Middleware.GlobalExceptions
             if (exception.GetType() == typeof(ValidationException))
                 return httpContext.Response.WriteAsync(new ExceptionModel
                 {
-                    Response = new ResponseDto<ExceptionModel>().Fail(new ExceptionModel(), ((ValidationException)exception).Errors.Select(x => x.ErrorMessage).ToList(), StatusCodes.Status400BadRequest)
+                    //Response = new ResponseDto<ExceptionModel>().Fail(new ExceptionModel(), ((ValidationException)exception).Errors.Select(x => x.ErrorMessage).ToList(), StatusCodes.Status400BadRequest)
 
                 }.ToString());
 

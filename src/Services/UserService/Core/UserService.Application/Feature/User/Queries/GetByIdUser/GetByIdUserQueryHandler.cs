@@ -3,6 +3,7 @@ using Cms.Shared.Abstract.UnitOfWork;
 using Cms.Shared.Bases;
 using Cms.Shared.Dtos.ResponseModel;
 using MediatR;
+using UserService.Domain.Entities;
 
 namespace UserService.Application.Feature.User.Queries.GetByIdUser
 {
@@ -12,9 +13,13 @@ namespace UserService.Application.Feature.User.Queries.GetByIdUser
         {
         }
 
-        public Task<ResponseDto<GetByIdUserQueryResponse>> Handle(GetByIdUserQueryRequest request, CancellationToken cancellationToken)
+        public async Task<ResponseDto<GetByIdUserQueryResponse>> Handle(GetByIdUserQueryRequest request, CancellationToken cancellationToken)
         {
-            throw new NotImplementedException();
+            var data = await unitOfWork.GetReadRepository<Users>().FindAsync(y => y.Id == request.Id && !y.IsDeleted);
+
+            var map = mapper.Map<Users, GetByIdUserQueryResponse>(data);
+
+            return new ResponseDto<GetByIdUserQueryResponse>().Success(map);
         }
     }
 }

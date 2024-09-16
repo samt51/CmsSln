@@ -19,6 +19,6 @@ namespace Cms.Shared.Abstract.Repositories
             Func<IQueryable<T>, IIncludableQueryable<T, object>>? include = null,
             bool enableTracking = false);
 
-        IQueryable<T> Find(Expression<Func<T, bool>> predicate, bool enableTracking = false);
+        Task<T> FindAsync(Expression<Func<T, bool>> predicate, bool enableTracking = false);
     }
 }
