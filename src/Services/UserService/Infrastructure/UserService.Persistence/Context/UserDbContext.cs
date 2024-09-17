@@ -15,7 +15,7 @@ namespace UserService.Persistence.Context
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
 
-            optionsBuilder.UseSqlServer("Server=DESKTOP-L558L50\\LOCALSQL,1434;Database=UserServiceDb;Trusted_Connection=True;TrustServerCertificate=true;");
+            optionsBuilder.UseNpgsql("Host=localhost;Port=5432;Username=postgres;Password=1425369As;Database=UserServiceDb;");
 
         }
         protected override void OnModelCreating(ModelBuilder modelBuilder)

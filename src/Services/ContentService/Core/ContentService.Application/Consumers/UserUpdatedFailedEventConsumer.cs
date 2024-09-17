@@ -16,9 +16,8 @@ namespace ContentService.Application.Consumers
 
         public async Task Consume(ConsumeContext<UserUpdatedFailedEvent> context)
         {
-
             var response = new ResponseDto<UpdateUserCommandResponse>().Fail(context.Message.Message, 400);
-          
+
         }
     }
 }

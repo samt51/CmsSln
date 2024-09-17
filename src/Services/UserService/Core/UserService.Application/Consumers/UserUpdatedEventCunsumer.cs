@@ -20,13 +20,13 @@ namespace UserService.Application.Consumers
         public async Task Consume(ConsumeContext<UserUpdatedEvent> context)
         {
 
-            var data = new Users { Id = 2, Name = "hasan" };
+            var data = await _unitOfWork.GetReadRepository<Users>().GetAsync(x => x.Id == context.Message.Id && !x.IsDeleted);
             data.Name = context.Message.Name;
             data.ModifyDate = DateTime.Now;
 
             _unitOfWork.OpenTransaction();
 
-            await _unitOfWork.GetWriteRepository<Users>().AddAsync(data);
+             await _unitOfWork.GetWriteRepository<Users>().UpdateAsync(data);
 
             if (await _unitOfWork.SaveAsync() > 0)
             {

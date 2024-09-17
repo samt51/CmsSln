@@ -16,6 +16,8 @@ namespace UserService.Application
 
             services.AddMassTransit(x =>
             {
+                x.AddConsumer<UserSelectedConsumer>();
+                x.AddConsumer<UserSelectedByIdConsumer>();
                 x.AddConsumer<UserUpdatedEventCunsumer>();
                 x.UsingRabbitMq((context, cfg) =>
                 {
@@ -27,6 +29,14 @@ namespace UserService.Application
                     cfg.ReceiveEndpoint(RabbitMQSettingsConst.UserUpdatedEventQueueName, e =>
                     {
                         e.ConfigureConsumer<UserUpdatedEventCunsumer>(context);
+                    });
+                    cfg.ReceiveEndpoint(RabbitMQSettingsConst.UserSelectedByIdEventQueueName, e =>
+                    {
+                        e.ConfigureConsumer<UserSelectedByIdConsumer>(context);
+                    });
+                    cfg.ReceiveEndpoint(RabbitMQSettingsConst.UserSelectedEventQueueName, e =>
+                    {
+                        e.ConfigureConsumer<UserSelectedConsumer>(context);
                     });
                 });
             });

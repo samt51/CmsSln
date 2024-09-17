@@ -16,6 +16,7 @@ namespace ContentService.Application
         {
             services.AddMassTransit(x =>
             {
+                x.AddConsumer<ContentSelectedEventConsumer>();
                 x.AddConsumer<UserUpdatedCompletedEventConsumer>();
                 x.AddConsumer<UserUpdatedFailedEventConsumer>();
                 x.UsingRabbitMq((context, cfg) =>
@@ -34,6 +35,12 @@ namespace ContentService.Application
                     cfg.ReceiveEndpoint(RabbitMQSettingsConst.UserUpdatedFailedEventQueueName, e =>
                     {
                         e.ConfigureConsumer<UserUpdatedFailedEventConsumer>(context);
+                    });
+
+
+                    cfg.ReceiveEndpoint(RabbitMQSettingsConst.ContentSelectedEventQueueName, e =>
+                    {
+                        e.ConfigureConsumer<ContentSelectedEventConsumer>(context);
                     });
 
                 });

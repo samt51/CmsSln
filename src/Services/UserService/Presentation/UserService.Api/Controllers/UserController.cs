@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using UserService.Application.Feature.User.Commands.CreateUser;
 using UserService.Application.Feature.User.Commands.DeleteUser;
 using UserService.Application.Feature.User.Commands.UpdateUser;
+using UserService.Application.Feature.User.Queries.GetAllUser;
 using UserService.Application.Feature.User.Queries.GetByIdUser;
 
 namespace UserService.Api.Controllers
@@ -18,17 +19,23 @@ namespace UserService.Api.Controllers
         {
             _mediator = mediator;
         }
+
+        [HttpGet]
+        public async Task<ResponseDto<IList<GetAllUserQueryResponse>>> GetAllAsync()
+        {
+            return await _mediator.Send(new GetAllUserQueryRequest());
+        }
         [HttpGet("{id}")]
         public async Task<ResponseDto<GetByIdUserQueryResponse>> GetByIdAsync(int id)
         {
             return await _mediator.Send(new GetByIdUserQueryRequest(id));
         }
-        [HttpPost]
-        public async Task<ResponseDto<DeleteUserCommandResponse>> DeleteAsync(DeleteUserCommandRequest request)
+        [HttpDelete("{id}")]
+        public async Task<ResponseDto<DeleteUserCommandResponse>> DeleteAsync(int id)
         {
-            return await _mediator.Send(request);
+            return await _mediator.Send(new DeleteUserCommandRequest(id));
         }
-        [HttpPost]
+        [HttpPut]
         public async Task<ResponseDto<UpdateUserCommandResponse>> UpdateAsync(UpdateUserCommandRequest request)
         {
             return await _mediator.Send(request);

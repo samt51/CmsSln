@@ -9,14 +9,13 @@ namespace ContentService.Application.Feature.Contents.Commands.UpdateContent
         public string Title { get; }
         public string Description { get; }
         public string Body { get; }
-        public int UserId { get; }
-        public UpdateContentCommandRequest(int id, string title, string description, string body, int userId)
+    
+        public UpdateContentCommandRequest(int id, string title, string description, string body)
         {
             this.Id = id;
             this.Title = title;
             this.Description = description;
             this.Body = body;
-            this.UserId = userId;
         }
     }
 }
