@@ -3,7 +3,7 @@ using MediatR;
 
 namespace ContentService.Application.Feature.Contents.Queries.GetAllContent
 {
-    public class GetAllContentQueyRequest : IRequest<ResponseDto<GetAllContentQueyResponse>>
+    public class GetAllContentQueyRequest : IRequest<ResponseDto<IList<GetAllContentQueyResponse>>>
     {
     }
 }

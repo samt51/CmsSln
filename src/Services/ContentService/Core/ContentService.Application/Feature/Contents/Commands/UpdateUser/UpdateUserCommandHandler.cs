@@ -7,6 +7,7 @@ using Cms.Shared.MessageQuery.Events.UserEvents;
 using ContentService.Application.Consumers;
 using MassTransit;
 using MediatR;
+using System.Security.Cryptography.Xml;
 
 namespace ContentService.Application.Feature.Contents.Commands.UpdateUser
 {
@@ -25,13 +26,7 @@ namespace ContentService.Application.Feature.Contents.Commands.UpdateUser
 
             var sendEndPoint = await _sendEndpoint.GetSendEndpoint(new Uri($"queue:{RabbitMQSettingsConst.UserUpdatedEventQueueName}"));
 
-            await sendEndPoint.Send(new UserUpdatedEvent { Id = 2, Name = "hasan" });
-
-            var d = new UserUpdatedCompletedEventConsumer();
-           
-
-
-
+            await sendEndPoint.Send(new UserUpdatedEvent { Id = 1, Name = "hasan" });
 
             return new ResponseDto<UpdateUserCommandResponse>().Success();
 

@@ -2,6 +2,7 @@
 using Cms.Shared.Abstract.UnitOfWorks;
 using Cms.Shared.Bases.Base;
 using Cms.Shared.Bases.Dtos.ResponseModel;
+using ContentService.Domain.Entites;
 using MediatR;
 
 namespace ContentService.Application.Feature.Contents.Commands.DeleteContent
@@ -12,9 +13,22 @@ namespace ContentService.Application.Feature.Contents.Commands.DeleteContent
         {
         }
 
-        public Task<ResponseDto<DeleteContentCommandResponse>> Handle(DeleteContentCommandRequest request, CancellationToken cancellationToken)
+        public async Task<ResponseDto<DeleteContentCommandResponse>> Handle(DeleteContentCommandRequest request, CancellationToken cancellationToken)
         {
-            throw new NotImplementedException();
+            var data = await unitOfWork.GetReadRepository<Content>().FindAsync(x => x.Id == request.Id && !x.IsDeleted);
+
+            data.IsDeleted = true;
+
+            unitOfWork.OpenTransaction();
+
+            await unitOfWork.GetWriteRepository<Content>().UpdateAsync(data);
+
+            if (await unitOfWork.SaveAsync() > 0)
+            {
+                await unitOfWork.CommitAsync();
+                return new ResponseDto<DeleteContentCommandResponse>().Success();
+            }
+            return new ResponseDto<DeleteContentCommandResponse>().Fail();
         }
     }
 }

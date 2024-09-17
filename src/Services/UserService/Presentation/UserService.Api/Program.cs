@@ -3,8 +3,7 @@ using UserService.Persistence;
 using UserService.Application;
 using Microsoft.EntityFrameworkCore;
 using UserService.Persistence.Context;
-using MassTransit;
-
+using Cms.Shared.Bases.CrossCuttuingConcerns.Middleware.GlobalExceptions;
 internal class Program
 {
     private static void Main(string[] args)
@@ -36,6 +35,7 @@ internal class Program
         }
 
 
+        app.ConfigureExceptionHandlingMiddleware();
         app.UseHttpsRedirection();
 
         app.UseAuthorization();

@@ -3,6 +3,7 @@ using Cms.Shared;
 using ContentService.Application;
 using Microsoft.EntityFrameworkCore;
 using ContentService.Persistence.Context;
+using Cms.Shared.Bases.CrossCuttuingConcerns.Middleware.GlobalExceptions;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -32,7 +33,7 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
-
+app.ConfigureExceptionHandlingMiddleware();
 app.UseAuthorization();
 
 app.MapControllers();
