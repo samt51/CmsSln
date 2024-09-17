@@ -3,6 +3,7 @@ using Cms.Shared.Abstract.UnitOfWorks;
 using Cms.Shared.Bases.Base;
 using Cms.Shared.Bases.Dtos.ResponseModel;
 using MediatR;
+using System.Threading.Tasks;
 using UserService.Domain.Entities;
 
 namespace UserService.Application.Feature.User.Commands.UpdateUser
