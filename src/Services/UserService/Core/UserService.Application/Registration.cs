@@ -1,7 +1,9 @@
-﻿using MassTransit;
+﻿using Cms.Shared.MessageQuery;
+using MassTransit;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using System.Reflection;
+using UserService.Application.Consumers;
 
 namespace UserService.Application
 {
@@ -14,6 +16,7 @@ namespace UserService.Application
 
             services.AddMassTransit(x =>
             {
+                x.AddConsumer<UserUpdatedEventCunsumer>();
                 x.UsingRabbitMq((context, cfg) =>
                 {
                     cfg.Host("localhost", 5672, "/", host =>
@@ -21,17 +24,21 @@ namespace UserService.Application
                         host.Username("guest");
                         host.Password("guest");
                     });
+                    cfg.ReceiveEndpoint(RabbitMQSettingsConst.UserUpdatedEventQueueName, e =>
+                    {
+                        e.ConfigureConsumer<UserUpdatedEventCunsumer>(context);
+                    });
                 });
             });
 
             services.AddMassTransitHostedService();
-            // MediatR konfigürasyonu
+
             services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(assembly));
 
-            // AutoMapper yapılandırması
+
             services.AddAutoMapper(assembly);
 
-            // Diğer servis kayıtları
+
 
             return services;
         }

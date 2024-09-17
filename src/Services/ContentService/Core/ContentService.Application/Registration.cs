@@ -1,4 +1,7 @@
-﻿using MassTransit;
+﻿using Cms.Shared.MessageQuery;
+using ContentService.Application.Consumers;
+using ContentService.Application.Feature.Contents.Commands.UpdateUser;
+using MassTransit;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -13,6 +16,8 @@ namespace ContentService.Application
         {
             services.AddMassTransit(x =>
             {
+                x.AddConsumer<UserUpdatedCompletedEventConsumer>();
+                x.AddConsumer<UserUpdatedFailedEventConsumer>();
                 x.UsingRabbitMq((context, cfg) =>
                 {
                     cfg.Host("localhost", 5672, "/", host =>
@@ -20,10 +25,22 @@ namespace ContentService.Application
                         host.Username("guest");
                         host.Password("guest");
                     });
+
+                    cfg.ReceiveEndpoint(RabbitMQSettingsConst.UserUpdatedCompletedEventQueueName, e =>
+                    {
+                        e.ConfigureConsumer<UserUpdatedCompletedEventConsumer>(context);
+                    });
+
+                    cfg.ReceiveEndpoint(RabbitMQSettingsConst.UserUpdatedFailedEventQueueName, e =>
+                    {
+                        e.ConfigureConsumer<UserUpdatedFailedEventConsumer>(context);
+                    });
+
                 });
             });
 
             services.AddMassTransitHostedService();
+            services.AddScoped<UpdateUserCommandHandler>();
 
             var assembly = Assembly.GetExecutingAssembly();
 
@@ -33,6 +50,9 @@ namespace ContentService.Application
             {
                 options.SuppressModelStateInvalidFilter = true;
             });
+
+
+            services.AddAutoMapper(assembly);
             return services;
         }
     }

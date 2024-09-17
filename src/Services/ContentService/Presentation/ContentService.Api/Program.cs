@@ -1,6 +1,8 @@
 using ContentService.Persistence;
 using Cms.Shared;
 using ContentService.Application;
+using Microsoft.EntityFrameworkCore;
+using ContentService.Persistence.Context;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -11,9 +13,14 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-builder.Services.AddPersistence(builder.Configuration);
 builder.Services.AddShared();
+builder.Services.AddPersistence(builder.Configuration);
 builder.Services.AddApplication(builder.Configuration);
+
+
+builder.Services.AddDbContext<ContentDbContext>(options =>
+options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+
 
 var app = builder.Build();
 
