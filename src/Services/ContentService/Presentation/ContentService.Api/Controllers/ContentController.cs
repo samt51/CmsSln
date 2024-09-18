@@ -46,5 +46,10 @@ namespace ContentService.Api.Controllers
         {
             return await _mediator.Send(request);
         }
+        [HttpPost]
+        public async Task<ResponseDto<UpdateUserCommandResponse>> UpdateUserAsync(UpdateUserCommandRequest request)
+        {
+            return await _mediator.Send(request);
+        }
     }
 }
