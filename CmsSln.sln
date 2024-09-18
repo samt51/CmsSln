@@ -51,7 +51,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Test", "Test", "{0C40F9CB-C
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "XUnit", "XUnit", "{39720431-BB53-4660-A1FC-F1D594F1C088}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cms.UnitTest", "Cms.UnitTest\Cms.UnitTest.csproj", "{8EE58067-F186-4E04-A44F-735B2117D308}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Cms.UnitTest", "Cms.UnitTest\Cms.UnitTest.csproj", "{8EE58067-F186-4E04-A44F-735B2117D308}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
